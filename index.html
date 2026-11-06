@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Exercises Runner</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #555;
+            margin-top: 0;
+        }
+        .console-window {
+            width: 90%;
+            max-width: 800px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            min-height: 400px;
+            margin-top: 20px;
+            box-sizing: border-box;
+        }
+        .header-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 15px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+        
+        #output {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript Exercises Output</h1>
+    <p>Executing <code>ex-1.js</code>, <code>ex2.js</code>, and <code>ex-3.js</code></p>
+
+    <div class="console-window">
+        <div class="header-bar">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        const outputDiv = document.getElementById('output');
+        const originalConsoleLog = console.log;
+        
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            
+            const message = args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+            ).join(' ');
+            
+            outputDiv.textContent += message + '\n';
+        };
+    </script>
+
+    <script src="ex-1.js"></script>
+    <script src="ex2.js"></script>
+    <script src="ex-3.js"></script>
+
+</body>
+</html>
